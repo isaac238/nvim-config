@@ -33,7 +33,6 @@ dashboard.section.header.val = {
 
 dashboard.section.buttons.val = {
 	dashboard.button("e", "New file", ":ene <BAR> startinsert <CR>"),
-	dashboard.button(":Telescope projects", "View recent projects", ":Telescope projects<CR>"),
 	dashboard.button(":Telescope <TAB>", "Previous Sessions", ":Telescope session-lens search_session<CR>"),
 	dashboard.button("SPC pf", "Search files", ":Telescope find_files<CR>"),
 	dashboard.button(":Telescope oldfiles", "Old files", ":Telescope oldfiles<CR>"),

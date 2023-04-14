@@ -1,7 +1,8 @@
 local builtin = require('telescope.builtin')
-require('telescope').load_extension('projects')
+require("telescope").load_extension("git_worktree")
 require('telescope').load_extension('session-lens')
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 vim.keymap.set('n', '<leader>ps', builtin.live_grep, {})
-
+vim.keymap.set('n', '<leader>wt', "<Cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>", {})
+vim.keymap.set('n', '<leader>cwt', "<Cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>", {})

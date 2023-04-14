@@ -71,11 +71,13 @@ return require('packer').startup(function(use)
   use ('nvim-tree/nvim-web-devicons')
   use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
   use ('sindrets/winshift.nvim')
-  use ('m4xshen/autoclose.nvim')
   use { 'rmagatti/auto-session', requires = {'rmagatti/session-lens', 'nvim-telescope/telescope.nvim'} }
-  use { "ahmedkhalf/project.nvim" }
   use ('nyoom-engineering/oxocarbon.nvim')
   use { "catppuccin/nvim", as = "catppuccin" }
+  use ('ThePrimeagen/git-worktree.nvim')
+  use "nvim-lua/plenary.nvim"
+  use "nvim-lua/popup.nvim"
+  use "nvim-telescope/telescope-fzy-native.nvim"
 
   use {
 	  'goolord/alpha-nvim',
@@ -89,6 +91,12 @@ return require('packer').startup(function(use)
 	  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
-end)
+  use({ 
+	"iamcco/markdown-preview.nvim", 
+    run = "cd app && npm install", 
+	setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+	ft = { "markdown" }, 
+  })
 
+end)
 
