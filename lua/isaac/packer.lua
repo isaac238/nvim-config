@@ -54,6 +54,8 @@ return require('packer').startup(function(use)
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
   use('tpope/vim-surround')
+  use('tpope/vim-scriptease')
+
   use({
       "folke/noice.nvim",
       requires = {
@@ -62,7 +64,6 @@ return require('packer').startup(function(use)
           -- OPTIONAL:
           --   `nvim-notify` is only needed, if you want to use the notification view.
           --   If not available, we use `mini` as the fallback
-          "rcarriga/nvim-notify",
       }
   })
 
@@ -78,6 +79,8 @@ return require('packer').startup(function(use)
   use "nvim-lua/plenary.nvim"
   use "nvim-lua/popup.nvim"
   use "nvim-telescope/telescope-fzy-native.nvim"
+  use('ThePrimeagen/harpoon')
+  use('folke/neodev.nvim')
 
   use {
 	  'goolord/alpha-nvim',
@@ -97,6 +100,9 @@ return require('packer').startup(function(use)
 	setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
 	ft = { "markdown" }, 
   })
+
+
+  use('isaac238/terminal_run.nvim')
 
 end)
 
