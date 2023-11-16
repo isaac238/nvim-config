@@ -81,6 +81,11 @@ return require('packer').startup(function(use)
   use "nvim-telescope/telescope-fzy-native.nvim"
   use('ThePrimeagen/harpoon')
   use('folke/neodev.nvim')
+  use('xiyaowong/transparent.nvim')
+  use('echasnovski/mini.nvim')
+  use('stevearc/aerial.nvim')
+  use('github/copilot.vim')
+  use('norcalli/nvim-colorizer.lua')
 
   use {
 	  'goolord/alpha-nvim',
@@ -103,6 +108,7 @@ return require('packer').startup(function(use)
 
 
   use('isaac238/terminal_run.nvim')
+  --use('/home/isaac238/Personal/Development/terminal_run.nvim')
 
 end)
 
