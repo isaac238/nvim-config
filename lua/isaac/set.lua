@@ -1,5 +1,5 @@
 vim.opt.background = "dark"
-vim.cmd("colorscheme oxocarbon")
+vim.cmd("colorscheme catppuccin")
 
 vim.opt.nu = true
 vim.opt.relativenumber = true

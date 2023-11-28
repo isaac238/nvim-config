@@ -9,7 +9,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.1',
+	  'nvim-telescope/telescope.nvim', tag = '0.1.4',
 	  -- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
@@ -85,7 +85,10 @@ return require('packer').startup(function(use)
   use('echasnovski/mini.nvim')
   use('stevearc/aerial.nvim')
   use('github/copilot.vim')
-  use('norcalli/nvim-colorizer.lua')
+  use('NvChad/nvim-colorizer.lua')
+  use('roobert/tailwindcss-colorizer-cmp.nvim')
+  use('MunifTanjim/prettier.nvim')
+  use('jose-elias-alvarez/null-ls.nvim')
 
   use {
 	  'goolord/alpha-nvim',
@@ -99,11 +102,11 @@ return require('packer').startup(function(use)
 	  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
-  use({ 
-	"iamcco/markdown-preview.nvim", 
-    run = "cd app && npm install", 
+  use({
+	"iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
 	setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
-	ft = { "markdown" }, 
+	ft = { "markdown" }
   })
 
 

@@ -1,5 +1,5 @@
 require("smartcolumn").setup({
-   colorcolumn = "80",
+   colorcolumn = "100",
    disabled_filetypes = { "help", "text", "markdown", "alpha" },
    custom_colorcolumn = {},
    limit_to_window = false,
