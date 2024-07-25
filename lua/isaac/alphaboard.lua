@@ -40,7 +40,7 @@ dashboard.section.buttons.val = {
 	dashboard.button("q", "Quit NVIM", ":qa<CR>"),
 }
 
-dashboard.section.footer.val = "'It's lights out and away we go!' - Adolf Hitler (Sept 1939)"
+dashboard.section.footer.val = "'Neovim - Linux Config"
 dashboard.config.opts.noautocmd = true
 vim.cmd[[autocmd User AlphaReady echo 'ready']]
 alpha.setup(dashboard.config)
