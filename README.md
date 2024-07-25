@@ -12,7 +12,7 @@ sudo apt-get install ripgrep
 ```
 
 ### Instructins
-Install packer
-Clone into ~/.config/nvim
-Go to plugin.lua
-:PackerSync
+- Install packer
+- Clone into ~/.config/nvim
+- Go to plugin.lua
+- :PackerSync
