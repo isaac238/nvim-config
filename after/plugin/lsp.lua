@@ -1,85 +1,105 @@
-local lsp = require('lsp-zero')
-local lspconfig = require('lspconfig');
-lsp.preset("recommended")
-
-lsp.ensure_installed({
-  'tsserver',
-  'eslint',
-  'lua_ls',
+-- Mason Setup
+require("mason").setup()
+require("mason-lspconfig").setup({
+    ensure_installed = { "tsserver", "eslint", "lua_ls", "pylsp" },
+    automatic_installation = true,
 })
 
--- Fix Undefined global 'vim'
-lsp.configure('lua-language-server', {
+-- nvim-cmp setup
+local cmp = require("cmp")
+local cmp_lsp = require("cmp_nvim_lsp")
+
+cmp.setup({
+    mapping = {
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-Enter>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-Space>"] = cmp.mapping.complete(),
+    },
+    sources = {
+        { name = "nvim_lsp" },
+    },
+})
+
+-- Capabilities for completion
+local capabilities = cmp_lsp.default_capabilities()
+
+-- Common on_attach function
+local on_attach = function(_, bufnr)
+    local opts = { buffer = bufnr, remap = false }
+
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
+    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
+    vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
+    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
+    vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
+    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+end
+
+-- LSP Server Configurations
+local lspconfig = require("lspconfig")
+
+-- Lua
+lspconfig.lua_ls.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
     settings = {
         Lua = {
             diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
+                globals = { "vim" },
+            },
+        },
+    },
 })
 
-
-local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
-local cmp_mappings = lsp.defaults.cmp_mappings({
-  ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-  ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-  ["<C-Space>"] = cmp.mapping.complete(),
+-- Python
+lspconfig.pylsp.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+        pylsp = {
+            plugins = {
+                flake8 = { enabled = true },
+                pycodestyle = { enabled = false },
+                mccabe = { enabled = false },
+                pyflakes = { enabled = false },
+            },
+        },
+    },
 })
 
-cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
-
-lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
+-- TypeScript
+lspconfig.tsserver.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
 })
 
-lsp.set_preferences({
-    suggest_lsp_servers = false,
-    sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I'
-    }
+-- ESLint
+lspconfig.eslint.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
 })
 
-local onAttach = function(client, bufnr)
-  local opts = {buffer = bufnr, remap = false}
-
-  vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-  vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-  vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-  vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-  vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-  vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-  vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-  vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-  vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-  vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-end
-
-lsp.on_attach(onAttach)
-
-
-lspconfig["dartls"].setup({
-	on_attach = onAttach,
-	settings = {
-		dart = {
-			analysisExcludedFolders = {
-				vim.fn.expand("$HOME/.pub-cache"),
-				vim.fn.expand("$HOME/flutter/"),
-			}
-		}
-	}
+-- Dart (manual setup)
+lspconfig.dartls.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+        dart = {
+            analysisExcludedFolders = {
+                vim.fn.expand("$HOME/.pub-cache"),
+                vim.fn.expand("$HOME/flutter/"),
+            },
+        },
+    },
 })
 
-lsp.setup()
-
+-- Diagnostics
 vim.diagnostic.config({
-    virtual_text = true
+    virtual_text = true,
 })
-
 

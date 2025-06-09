@@ -9,8 +9,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.4',
-	  -- or                            , branch = '0.1.x',
+	  'nvim-telescope/telescope.nvim',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
@@ -28,8 +27,8 @@ return require('packer').startup(function(use)
   }
 
   use {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v1.x',
+	  'hrsh7th/nvim-cmp',
+	  lazy = false,
 	  requires = {
 		  -- LSP Support
 		  {'neovim/nvim-lspconfig'},             -- Required
@@ -37,7 +36,6 @@ return require('packer').startup(function(use)
 		  {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
 		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},         -- Required
 		  {'hrsh7th/cmp-nvim-lsp'},     -- Required
 		  {'hrsh7th/cmp-buffer'},       -- Optional
 		  {'hrsh7th/cmp-path'},         -- Optional
@@ -54,6 +52,7 @@ return require('packer').startup(function(use)
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
   use('tpope/vim-surround')
+  use('tpope/vim-abolish')
   use('tpope/vim-scriptease')
 
   use({
@@ -70,7 +69,7 @@ return require('packer').startup(function(use)
   use { 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim' }
   use ("m4xshen/smartcolumn.nvim")
   use ('nvim-tree/nvim-web-devicons')
-  use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
+  use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
   use ('sindrets/winshift.nvim')
   use { 'rmagatti/auto-session', requires = {'rmagatti/session-lens', 'nvim-telescope/telescope.nvim'} }
   use ('nyoom-engineering/oxocarbon.nvim')
