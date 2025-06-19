@@ -1,4 +1,4 @@
 require('isaac.remap')
-require('isaac.packer')
+require('isaac.lazy')
 require('isaac.alphaboard')
 require('isaac.set')
