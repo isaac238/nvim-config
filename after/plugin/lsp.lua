@@ -1,7 +1,7 @@
 -- Mason Setup
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "tsserver", "eslint", "lua_ls", "pylsp" },
+    ensure_installed = { "ts_ls", "eslint", "lua_ls", "pylsp" },
     automatic_installation = true,
 })
 
@@ -11,9 +11,12 @@ local cmp_lsp = require("cmp_nvim_lsp")
 
 cmp.setup({
     mapping = {
-        ["<C-p>"] = cmp.mapping.select_prev_item(),
-        ["<C-n>"] = cmp.mapping.select_next_item(),
-        ["<C-Enter>"] = cmp.mapping.confirm({ select = true }),
+        ["<Up>"] = cmp.mapping.select_prev_item(),
+        ["<Down>"] = cmp.mapping.select_next_item(),
+        ["<Tab>"] = cmp.mapping.confirm({
+            behaviour = cmp.ConfirmBehaviour.Replace,
+            select = true
+        }),
         ["<C-Space>"] = cmp.mapping.complete(),
     },
     sources = {

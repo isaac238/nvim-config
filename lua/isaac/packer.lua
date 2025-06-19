@@ -86,7 +86,13 @@ return require('packer').startup(function(use)
   use('NvChad/nvim-colorizer.lua')
   use('roobert/tailwindcss-colorizer-cmp.nvim')
   use('MunifTanjim/prettier.nvim')
-  use('jose-elias-alvarez/null-ls.nvim')
+
+  use({
+    "stevearc/conform.nvim",
+    config = function()
+      require("conform").setup()
+    end,
+  })
 
   use {
 	  'goolord/alpha-nvim',
